@@ -38,12 +38,7 @@ interface SpeechRecognition extends EventTarget {
   onerror: ((this: SpeechRecognition, ev: SpeechRecognitionErrorEvent) => any) | null;
 }
 
-declare global {
-  interface Window {
-    SpeechRecognition: new () => SpeechRecognition;
-    webkitSpeechRecognition: new () => SpeechRecognition;
-  }
-}
+// SpeechRecognition types are defined in global.d.ts
 
 const VoiceControl: React.FC<VoiceControlProps> = ({ 
   appliances, 
@@ -376,7 +371,11 @@ const VoiceControl: React.FC<VoiceControlProps> = ({
       </AnimatePresence>
 
       {/* Help Component */}
-      <VoiceCommandsHelp appliances={appliances} />
+      <VoiceCommandsHelp appliances={appliances.map(app => ({
+        name: app.name,
+        location: app.location,
+        type: 'device' // Default type since original doesn't have type
+      }))} />
 
       {/* Help Tooltip */}
       <motion.div

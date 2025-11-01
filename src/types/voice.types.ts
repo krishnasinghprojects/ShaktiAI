@@ -38,9 +38,20 @@ export interface SpeechConfig {
   volume: number;
 }
 
-declare global {
-  interface Window {
-    SpeechRecognition: any;
-    webkitSpeechRecognition: any;
-  }
+export interface VoiceFeedback {
+  message: string;
+  type: 'success' | 'error' | 'processing' | 'info';
 }
+
+export interface ApplianceControlResult {
+  success: boolean;
+  message?: string;
+  appliance?: {
+    name: string;
+    state: 'on' | 'off';
+    location?: string;
+  };
+  error?: string;
+}
+
+// SpeechRecognition types are now defined in global.d.ts

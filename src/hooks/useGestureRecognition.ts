@@ -1,13 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { GestureRecognition, GestureCommand } from '../types/accessibility.types';
 
-// MediaPipe Hands will be loaded dynamically
-declare global {
-  interface Window {
-    Hands: any;
-    Camera: any;
-  }
-}
+// MediaPipe Hands will be loaded dynamically - types are defined in global.d.ts
 
 export const useGestureRecognition = () => {
   const videoRef = useRef<HTMLVideoElement>(null);

@@ -27,12 +27,14 @@ const SmartVoiceAssistant: React.FC<SmartVoiceAssistantProps> = ({
     if (!isLoadingAppliances && appliances.length > 0) {
       showNotification({
         type: 'success',
-        message: `Voice Assistant connected! Found ${appliances.length} smart devices.`,
+        title: 'Voice Assistant Connected',
+        message: `Found ${appliances.length} smart devices.`,
         duration: 3000
       });
     } else if (!isLoadingAppliances && backendError) {
       showNotification({
         type: 'error',
+        title: 'Connection Error',
         message: 'Could not connect to smart home backend.',
         duration: 5000
       });
@@ -85,10 +87,9 @@ const SmartVoiceAssistant: React.FC<SmartVoiceAssistantProps> = ({
           success: true,
           appliance: {
             name: appliance.name,
-            state: currentState,
+            state: currentState as 'on' | 'off',
             location: appliance.location
-          },
-          message: `Certainly! ${appliance.name} is already ${currentState}, sir/madam.`
+          }
         };
       }
 
@@ -110,7 +111,7 @@ const SmartVoiceAssistant: React.FC<SmartVoiceAssistantProps> = ({
         success: true,
         appliance: {
           name: appliance.name,
-          state: newState,
+          state: newState as 'on' | 'off',
           location: appliance.location
         }
       };

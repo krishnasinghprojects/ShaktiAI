@@ -89,7 +89,7 @@ export const useGeminiVoiceAssistant = (config: VoiceAssistantConfig) => {
       if (config.onApplianceControl) {
         const result = await config.onApplianceControl(input);
         if (result.success) {
-          const response = result.message || generateSuccessResponse(result);
+          const response = generateSuccessResponse(result);
           setResponse(response);
           speakResponse(response);
           return;

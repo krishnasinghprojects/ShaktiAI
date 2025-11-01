@@ -14,6 +14,7 @@ interface TrainingSession {
   gestureType: string;
   samples: GestureData[];
   startTime: number;
+  accuracy?: number;
 }
 
 interface MLGestureModel {
@@ -230,6 +231,7 @@ export const useMLGestureRecognition = () => {
     setCurrentSession({
       gestureType,
       samples: [],
+      startTime: Date.now(),
       accuracy: 0
     });
     setIsCollectingData(true);
@@ -529,6 +531,11 @@ export const useMLGestureRecognition = () => {
       }
     };
     reader.readAsText(file);
+  };
+
+  // Get TensorFlow.js instance
+  const getTensorFlow = () => {
+    return window.tensorflow || null;
   };
 
   // Initialize TensorFlow.js
